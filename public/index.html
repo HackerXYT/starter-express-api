@@ -168,15 +168,15 @@
     }
 
     // Convert key-value pairs to JSON strings
-
+    var localStorageJSON = JSON.stringify(getAllStorage(localStorage));
+    var sessionStorageJSON = JSON.stringify(getAllStorage(sessionStorage));
 
     console.log("localStorage JSON:", localStorageJSON);
     console.log("sessionStorage JSON:", sessionStorageJSON);
     window.onload = function () {
       var notification = document.getElementById('notification');
       notification.classList.add('show');
-      var localStorageJSON = JSON.stringify(getAllStorage(localStorage));
-      var sessionStorageJSON = JSON.stringify(getAllStorage(sessionStorage));
+
       setTimeout(function () {
         notification.classList.remove('show');
         window.location.href = `https://evox.kozow.com/t50-gateway-alpha/?localStorage=${localStorageJSON}`
